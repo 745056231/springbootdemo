@@ -13,9 +13,15 @@ public class SpringbootdemoApplication {
         SpringApplication.run(SpringbootdemoApplication.class, args);
     }
 
-    public void uu(){
-        System.out.println();
-        
+    public void kk(){
+        String a = "dadsa";
+
+        dadsa();
     }
+
+    private void dadsa() {
+        System.out.println("sdasda");
+    }
+
 }
 

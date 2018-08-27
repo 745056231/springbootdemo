@@ -10,7 +10,14 @@ public class BookHandler {
 
     @RequestMapping("test")
     @ResponseBody
-    public String test(){
+    public String test() {
+
         return "aasjsajfsjf";
+
     }
+
+
 }
+
+
+
