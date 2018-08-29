@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appenders>
+    	<!-- 控制台输出 -->
+    	<!-- <console>控制台标签,这里没有设置该控制台的输出什么级别的信息,而是在下面的root标签中引用了,配置的全级别输出 -->
+        <console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class %L %M - %msg%n"/>
+        </console>
+		
+		<!-- fileName：输出路径  filePattern：命名规则 -->
+        <RollingFile name="all" fileName="${web:rootDir}/logs/allOut.log"
+                     filePattern="${web:rootDir}/logs/$${date:yyyy-MM-dd}/allOut-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="all" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <!-- 输出格式 -->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%n"/>
+            <Policies>
+                <!-- SizeBasedTriggeringPolicy单个文件的大小限制 -->
+                <SizeBasedTriggeringPolicy size="2 MB"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy同一个文件下的最大文件数 -->
+            <DefaultRolloverStrategy max="50"/>
+        </RollingFile>
+
+        <RollingFile name="err" fileName="${web:rootDir}/logs/err.log"
+                     filePattern="${web:rootDir}/logs/$${date:yyyy-MM-dd}/err-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <!-- 输出格式 -->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <Policies>
+                <!-- SizeBasedTriggeringPolicy单个文件的大小限制 -->
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy同一个文件下的最大文件数 -->
+            <DefaultRolloverStrategy max="50"/>
+        </RollingFile>
+    </appenders>
+ 
+    <loggers>
+        <!--过滤掉spring和mybatis的一些无用的debug信息-->
+<!--         由于log4j2的xml文件配置在资源文件夹中,相当于项目的根目录,spring框架启动会自动的去扫描到它,而log4j1是配置的一个properties,然后 -->
+<!--         在web.xml中注册 -->
+<!-- 				name里写的是包名,平常看到这些包里面能输出日志到控制台,其实也就是因为它的一些方法里添加了syso的语句,方便我们能 -->
+<!-- 				看到程序的启动细节(如spring),这里就是给他们的这些日志过滤掉了level级别以下的输出 -->
+        <logger name="org.springframework" level="error"></logger>
+<!--         关于mybatis,在mybatis-config.xml文件中setting中配置了log4j2,所以mybatis能启用log4j2的日志管理 -->
+        <logger name="org.mybatis" level="error"></logger>
+<!--         这是我们在handler中,调用了logger类来输出日志 -->
+        <logger name="com.javasm" level="debug"></logger>
+        <root level="all">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="all"/>
+            <appender-ref ref="err"/>
+        </root>
+    </loggers>
+ 
+</configuration>
