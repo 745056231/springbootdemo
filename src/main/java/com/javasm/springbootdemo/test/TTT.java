@@ -17,5 +17,6 @@ package com.javasm.springbootdemo.test;
 
 public class TTT {
     int a = 1;
+    int  b  = 55;
 
 }
