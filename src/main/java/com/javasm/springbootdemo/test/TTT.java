@@ -13,17 +13,9 @@
 package com.javasm.springbootdemo.test;
 
 
-/**
- * 〈功能简述〉
- * 〈〉
- * @author 郭蒙
- * @create 2019/4/16
- * @since 1.0.0
- */
+
 
 public class TTT {
-  
-  int a  = 10;
-
+    int a = 1000;
 
 }
