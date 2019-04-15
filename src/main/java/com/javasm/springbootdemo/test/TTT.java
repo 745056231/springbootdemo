@@ -22,6 +22,8 @@ package com.javasm.springbootdemo.test;
  */
 
 public class TTT {
+  
+  int a  = 10;
 
 
 }
