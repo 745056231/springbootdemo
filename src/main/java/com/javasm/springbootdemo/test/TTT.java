@@ -16,6 +16,6 @@ package com.javasm.springbootdemo.test;
 
 
 public class TTT {
-    int a = 1000;
+    int a = 1;
 
 }
